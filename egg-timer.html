@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    *{margin:0; padding: 0;}
+
+    #root{
+      width: 100vw; height: 100vh;
+      background: url(./img/tile-bg.svg);
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .timer{
+      width: 64vw; height: 15vh;
+      background-color: #fff;
+      position: fixed;
+      top: 10vh;
+      z-index: 1;
+    }
+
+    .egg{
+      width: 65vw; height: 35vh;
+      position: absolute;
+      bottom: 22vh;
+      z-index: 3;
+    }
+
+    .chair{
+      width: 65vw; height: 13vh;
+      position: absolute;
+      bottom: 0;
+      z-index: 2;
+      background-image: url(./img/spa-chair.svg);
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+    
+    .water{
+      width: 100vw; height: 40vh;
+      background-image: url(./img/tile-water-02.svg);
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: absolute;
+      bottom: 0;
+      z-index: 1;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <div id="root">
+    <div class="timer"></div>
+    <div class="egg">
+      <img src="./img/egg-spa.svg" alt="">
+    </div>
+    <div class="water"></div>
+  </div>
+
+
+  <script>
+    const root = document.getElementById('root');
+    const timer = document.querySelector('.timer');
+    const egg = document.querySelector('.egg');
+    const water = document.querySelector('.water');
+    // console.log(timer);
+
+    /* 애니메이션 animate()로 처리해보기
+    let timerKeyframe = [
+      { opacity: 1 },
+      { opacity: 0 },
+    ]
+
+    let timerDuration = {
+      duration: 500,
+      iterations: 1,
+    }
+
+    let waterKeyframe = [
+      {transform: 'translateX(0px)'},
+      {transform: 'translateX(-100vw)'},
+    ]
+
+    root.addEventListener('click', function(){
+
+      timer.animate(timerKeyframe, timerDuration);
+      water.animate(waterKeyframe, timerDuration);
+
+    });
+
+    */
+
+    let eggTime = 10;
+    const timeTxt = document.createElement('h1');
+    timer.appendChild(timeTxt);
+    timeTxt.textContent = eggTime;
+    
+    const showerTime = setInterval(()=>{
+      eggTime = eggTime-1;
+      timeTxt.textContent = eggTime;
+      
+      
+      
+      if(eggTime <= 0){
+        clearInterval(showerTime);
+      
+        alert('~~찬물샤워시간~~')
+
+        // timer 사라지게
+        let tiemerI = 1;
+        const timerMove = setInterval(() => {
+          
+          tiemerI = tiemerI-0.1;
+          timer.style.opacity = tiemerI;
+          // console.log(timer.style.opacity);
+          
+          if(tiemerI < 0){
+            clearInterval(timerMove);
+            tiemerI = 1;
+          }
+            
+        }, 50);
+      
+      
+        // water 왼쪽으로 옮기기
+        let waterI = 0;
+        const waterMove = setInterval(() => {
+          waterI = waterI-10;
+          water.style.transform = `translateX(${waterI}vw)`;
+          if(waterI === -100){
+            clearInterval(waterMove);
+            waterI = 0;
+          }
+        }, 20);
+
+
+        // egg 이미지 바꿔주기
+        // console.dir(egg.children[0])
+        egg.children[0].src = './img/egg-shawer.svg';
+
+
+        // 의자
+        const chair = document.createElement('div');
+        root.appendChild(chair);
+        chair.classList.add('chair');
+        chair.id = 'eggChair';
+        // consol;e.log(root.children);
+        const eggChair = document.getElementById('eggChair');
+        
+        let chairI = 0;
+        const chairMove = setInterval(() => {
+          chairI = chairI+1;
+          eggChair.style.bottom = `${chairI}vh`;
+
+          if(chairI >= 20){
+            clearInterval(chairMove);
+          }
+        }, 10);
+      }
+    }, 1000);
+
+
+
+
+  </script>
+</body>
+</html>
