@@ -1,8 +1,14 @@
-*{margin:0; padding: 0;}
+* {
+  margin: 0;
+  padding: 0;
+}
 
-.timer{
-  width: 64vw; height: 15vh;
+.timer {
+  width: 64vw;
+  height: 15vh;
   background-color: #fff;
+  border: 5px solid rgb(78, 170, 165);
+  border-radius: 4vh;
   position: fixed;
   top: 10vh;
   z-index: 1;
@@ -10,17 +16,20 @@
   justify-content: center;
   align-items: center;
   font-size: 32px;
+  font-family: "Bungee", cursive;
 }
 
-.egg{
-  width: 65vw; height: 35vh;
+.egg {
+  width: 65vw;
+  height: 35vh;
   position: absolute;
   bottom: 22vh;
   z-index: 3;
 }
 
-.chair{
-  width: 65vw; height: 13vh;
+.chair {
+  width: 65vw;
+  height: 13vh;
   position: absolute;
   bottom: 0;
   z-index: 2;
@@ -29,8 +38,9 @@
   background-repeat: no-repeat;
 }
 
-.water{
-  width: 100vw; height: 40vh;
+.water {
+  width: 100vw;
+  height: 40vh;
   background-image: url(../img/tile-water-02.svg);
   background-position: center bottom;
   background-repeat: no-repeat;
@@ -38,4 +48,49 @@
   position: absolute;
   bottom: 0;
   z-index: 1;
+}
+
+.last-button {
+  width: 60vw;
+  height: 10vh;
+  background-color: #fff;
+  border: 5px solid rgb(78, 170, 165);
+  border-radius: 4vh;
+  position: fixed;
+  bottom: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-family: "Jua", sans-serif;
+  color: #bf1010;
+  cursor: pointer;
+}
+
+.eat {
+  width: 64vw;
+  height: 15vh;
+  background-color: #fff;
+  border: 5px solid rgb(78, 170, 165);
+  border-radius: 4vh;
+  position: fixed;
+  top: 10vh;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-family: "Jua", sans-serif;
+  color: #bf1010;
+}
+
+.loading {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../img/loading-bg.svg);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 5;
 }
