@@ -1,179 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/class.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=Jua&display=swap"
+      rel="stylesheet"
+    />
 
-  <style>
-    *{margin:0; padding: 0;}
-
-    #root{
-      width: 100vw; height: 100vh;
-      background: url(./img/tile-bg.svg);
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .timer{
-      width: 64vw; height: 15vh;
-      background-color: #fff;
-      position: fixed;
-      top: 10vh;
-      z-index: 1;
-    }
-
-    .egg{
-      width: 65vw; height: 35vh;
-      position: absolute;
-      bottom: 22vh;
-      z-index: 3;
-    }
-
-    .chair{
-      width: 65vw; height: 13vh;
-      position: absolute;
-      bottom: 0;
-      z-index: 2;
-      background-image: url(./img/spa-chair.svg);
-      background-position: center bottom;
-      background-repeat: no-repeat;
-    }
-    
-    .water{
-      width: 100vw; height: 40vh;
-      background-image: url(./img/tile-water-02.svg);
-      background-position: center bottom;
-      background-repeat: no-repeat;
-      background-size: cover;
-      position: absolute;
-      bottom: 0;
-      z-index: 1;
-    }
-
-  </style>
-
-</head>
-
-<body>
-  <div id="root">
-    <div class="timer"></div>
-    <div class="egg">
-      <img src="./img/egg-spa.svg" alt="">
-    </div>
-    <div class="water"></div>
-  </div>
-
-
-  <script>
-    const root = document.getElementById('root');
-    const timer = document.querySelector('.timer');
-    const egg = document.querySelector('.egg');
-    const water = document.querySelector('.water');
-    // console.log(timer);
-
-    /* 애니메이션 animate()로 처리해보기
-    let timerKeyframe = [
-      { opacity: 1 },
-      { opacity: 0 },
-    ]
-
-    let timerDuration = {
-      duration: 500,
-      iterations: 1,
-    }
-
-    let waterKeyframe = [
-      {transform: 'translateX(0px)'},
-      {transform: 'translateX(-100vw)'},
-    ]
-
-    root.addEventListener('click', function(){
-
-      timer.animate(timerKeyframe, timerDuration);
-      water.animate(waterKeyframe, timerDuration);
-
-    });
-
-    */
-
-    let eggTime = 10;
-    const timeTxt = document.createElement('h1');
-    timer.appendChild(timeTxt);
-    timeTxt.textContent = eggTime;
-    
-    const showerTime = setInterval(()=>{
-      eggTime = eggTime-1;
-      timeTxt.textContent = eggTime;
-      
-      
-      
-      if(eggTime <= 0){
-        clearInterval(showerTime);
-      
-        alert('~~찬물샤워시간~~')
-
-        // timer 사라지게
-        let tiemerI = 1;
-        const timerMove = setInterval(() => {
-          
-          tiemerI = tiemerI-0.1;
-          timer.style.opacity = tiemerI;
-          // console.log(timer.style.opacity);
-          
-          if(tiemerI < 0){
-            clearInterval(timerMove);
-            tiemerI = 1;
-          }
-            
-        }, 50);
-      
-      
-        // water 왼쪽으로 옮기기
-        let waterI = 0;
-        const waterMove = setInterval(() => {
-          waterI = waterI-10;
-          water.style.transform = `translateX(${waterI}vw)`;
-          if(waterI === -100){
-            clearInterval(waterMove);
-            waterI = 0;
-          }
-        }, 20);
-
-
-        // egg 이미지 바꿔주기
-        // console.dir(egg.children[0])
-        egg.children[0].src = './img/egg-shawer.svg';
-
-
-        // 의자
-        const chair = document.createElement('div');
-        root.appendChild(chair);
-        chair.classList.add('chair');
-        chair.id = 'eggChair';
-        // consol;e.log(root.children);
-        const eggChair = document.getElementById('eggChair');
-        
-        let chairI = 0;
-        const chairMove = setInterval(() => {
-          chairI = chairI+1;
-          eggChair.style.bottom = `${chairI}vh`;
-
-          if(chairI >= 20){
-            clearInterval(chairMove);
-          }
-        }, 10);
+    <style>
+      #root {
+        width: 100vw;
+        height: 100vh;
+        background: url(./img/tile-bg.svg);
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
-    }, 1000);
 
+      #waterfall {
+        width: 40vw;
+        height: 53vh;
+        background-image: url(./img/water-fall.svg);
+        background-position: center top;
+        background-repeat: no-repeat;
+        position: absolute;
+        z-index: 4;
+      }
+    </style>
+  </head>
 
+  <body>
+    <div id="root">
+      <div class="timer"></div>
+      <div class="egg">
+        <img src="./img/egg-spa.svg" alt="" />
+      </div>
+      <div class="water"></div>
+    </div>
 
+    <script>
+      const root = document.getElementById("root");
+      const timer = document.querySelector(".timer");
+      const egg = document.querySelector(".egg");
+      const water = document.querySelector(".water");
+      // console.log(timer);
 
-  </script>
-</body>
+      // 로딩 이미지 5초 후에 메인화면으로 이동한다.
+      // +++ loading Page +++ styling
+      const loadImg = document.createElement("div");
+      loadImg.classList.add("loading");
+      root.appendChild(loadImg);
+
+      // +++ loading Page +++
+      let loadI = 0;
+      const loadTimer = setInterval(() => {
+        loadI++;
+        // console.log(loadI);
+        if (loadI === 3) {
+          clearInterval(loadTimer);
+          loadImg.remove();
+        }
+      }, 1000);
+
+      // +++ Main Page +++ timer
+      // timer를 위한 변수들
+      let eggTime = 3;
+      let timeMin = "";
+      let timeSec = "";
+      const timeTxt = document.createElement("h1");
+      timer.appendChild(timeTxt);
+      timeMin = parseInt(eggTime / 60);
+      timeSec = eggTime % 60;
+
+      // 타이머 시작 전, 'start'버튼. 누르면 타이머 작동됨
+      timeTxt.textContent = `START`;
+      timeTxt.style.color = "#004042";
+      timer.style.cursor = "pointer";
+
+      // 타이머 시작 (이벤트 추가)
+      timer.addEventListener("click", function () {
+        console.dir(timer);
+        timeTxt.textContent = `0${timeMin} : 0${timeSec}`;
+
+        const showerTime = setInterval(() => {
+          eggTime = eggTime - 1;
+          timeMin = parseInt(eggTime / 60);
+          timeSec = eggTime % 60;
+
+          if (timeSec < 10) {
+            timeTxt.textContent = `0${timeMin} : 0${timeSec}`;
+          } else {
+            timeTxt.textContent = `0${timeMin} : ${timeSec}`;
+          }
+
+          if (eggTime <= 0) {
+            timeTxt.style.color = "#A92121";
+            clearInterval(showerTime);
+
+            alert("차가운 물로 씻으러 가기");
+
+            // timer 사라지게
+            timer.style.display = "none";
+
+            // water 왼쪽으로 옮기기
+            let waterI = 0;
+            const waterMove = setInterval(() => {
+              waterI = waterI - 10;
+              water.style.transform = `translateX(${waterI}vw)`;
+              if (waterI === -100) {
+                clearInterval(waterMove);
+                waterI = 0;
+              }
+            }, 25);
+
+            // egg 이미지 바꿔주기
+            egg.children[0].src = "./img/egg-shawer.svg";
+
+            // 의자
+            const chair = document.createElement("div");
+            root.appendChild(chair);
+            chair.classList.add("chair");
+            chair.id = "eggChair";
+            const eggChair = document.getElementById("eggChair");
+
+            let chairI = 0;
+            const chairMove = setInterval(() => {
+              chairI = chairI + 1;
+              eggChair.style.bottom = `${chairI}vh`;
+
+              if (chairI >= 20) {
+                clearInterval(chairMove);
+              }
+            }, 10);
+
+            // 샤워기
+            const waterfall = document.createElement("div");
+            root.appendChild(waterfall);
+            waterfall.id = "waterfall";
+            const waterfallShower = document.getElementById("waterfall");
+
+            let waterfallI = -70;
+            const waterFallMove = setInterval(() => {
+              waterfallI = waterfallI + 1;
+              waterfallShower.style.top = `${waterfallI}vh`;
+
+              if (waterfallI === -1) {
+                clearInterval(waterFallMove);
+              }
+            }, 1);
+
+            // 마무리 버튼
+            const lastBtn = document.createElement("button");
+            root.appendChild(lastBtn);
+            lastBtn.classList.add("last-button");
+            lastBtn.textContent = "마무리 하기";
+
+            const coldWaterBtn = document.querySelector(".last-button");
+            console.log(coldWaterBtn);
+            coldWaterBtn.addEventListener("click", function () {
+              console.log("마무리");
+
+              // 계란 이미지 바꾸기
+              egg.children[0].src = "./img/egg-spa-cold.svg";
+              egg.style.width = 85 + "vw";
+              egg.style.bottom = 22 + "vh";
+
+              // 샤워기 치우기
+              waterfall.remove();
+
+              // 의자도 치워야됨
+              eggChair.remove();
+
+              // 목욕탕 다시 불러오기
+              let coldWaterI = -100;
+              water.style.backgroundImage = "url(./img/tile-water-03.svg)";
+              const coldWaterMove = setInterval(() => {
+                coldWaterI = coldWaterI + 10;
+                water.style.transform = `translateX(${coldWaterI}vw)`;
+                if (coldWaterI === 0) {
+                  clearInterval(coldWaterMove);
+                  coldWaterI = 0;
+                }
+              }, 25);
+
+              // 냠냠
+              const eat = document.createElement("div");
+              root.appendChild(eat);
+              eat.classList.add("eat");
+              eat.textContent = "맛있게 먹기!";
+            });
+          }
+        }, 1000);
+      });
+    </script>
+  </body>
 </html>
